@@ -4,11 +4,13 @@ for(let i=0; i<document.querySelectorAll('.drum').length; i++){
     document.querySelectorAll('button')[i].addEventListener('click', function () {
         var buttonClicked = this.innerHTML;
         makeSound(buttonClicked);
+        buttonAnimation(buttonClicked);
     });
 }
 
 document.addEventListener('keydown', function (event) {
     makeSound(event.key);
+    buttonAnimation(event.key);
 })
 
 function makeSound(key) {
@@ -42,7 +44,16 @@ function makeSound(key) {
       tom4.play();
       break;
     default:
-      alert("Press only the keys present in the image");
+    //   alert("Press only the keys present in the image");
       break;
   }
+}
+
+function buttonAnimation(buttonPressed){
+    var activeBtn = document.querySelector("."+buttonPressed);
+    activeBtn.classList.add('pressed');
+
+    setTimeout(function() {
+        activeBtn.classList.remove('pressed')
+    }, 100)
 }
